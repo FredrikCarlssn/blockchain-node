@@ -75,6 +75,8 @@ class Keys {
       /@-----END PUBLIC KEY-----@/g,
       ""
     );
+    publicKeyString = publicKeyString.replace(/[^a-zA-Z0-9]/g, "");
+    publicKeyString = "0x" + publicKeyString.slice(-40);
     return publicKeyString;
   }
 

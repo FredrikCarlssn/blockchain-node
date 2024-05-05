@@ -12,8 +12,9 @@ This project is a frontend for the blockchain project. It is a simple web applic
 ## Usage
 
 1. Run the application 'node server.js 3001'
-1. Run the frontend `npm run dev`
-1. Visit `http://localhost:3001`
+2. Run the frontend `npm run dev`
+3. Steal the wallet address from the genesis block, it can be found in the log when starting the server
+4. Visit `http://localhost:5173`
 
 ## Team Members
 
