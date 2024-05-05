@@ -34,7 +34,6 @@ class Keys {
   }
 
   encryptWithPrivateKey(message) {
-    console.log(this.privateKey.toString());
     const buffer = Buffer.from(message, "utf-8");
     const encrypted = crypto.privateEncrypt(this.privateKey.toString(), buffer);
     return encrypted.toString("base64");

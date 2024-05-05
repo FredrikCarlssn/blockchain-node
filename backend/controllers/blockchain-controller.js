@@ -1,4 +1,4 @@
-const { bloc, blockchain } = require("../utilities/config.js");
+const { blockchain } = require("../utilities/config.js");
 const axios = require("axios");
 
 exports.getBlockchain = (req, res) => {

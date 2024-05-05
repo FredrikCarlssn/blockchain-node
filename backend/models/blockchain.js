@@ -1,9 +1,10 @@
 const sha256 = require("sha256");
-const { v4: uuidv4 } = require("uuid");
-const Keys = require("./keyGenerator.js");
+const Wallet = require("./wallet");
 
 class Blockchain {
   constructor() {
+    const wallet = new Wallet();
+    wallet.balance = 21000000;
     this.chain = [
       {
         index: 1,
@@ -15,7 +16,7 @@ class Blockchain {
       },
     ];
     this.pendingTransactions = [];
-    this.ledger = { cars: [], owners: [], dealerships: [] };
+    this.ledger = { wallets: [wallet] };
     this.nodeUrl = process.argv[3];
     this.networkNodes = [];
   }
@@ -36,23 +37,10 @@ class Blockchain {
   emptyPendingTransactions(newBlock) {
     newBlock.transactions.map((transaction) => {
       switch (transaction.transactionType) {
-        case "newCar":
-          const { name, publicKey, location, vin, make, model, year, owner } =
-            transaction.details;
-          if (vin && make && model && year && owner)
-            this.ledger.cars.push(transaction.details);
+        case "token":
+          this.tokenTransaction(transaction);
           break;
-        case "newPerson":
-          this.ledger.owners.push(transaction.details);
-          break;
-        case "newDealership":
-          this.ledger.dealerships.push(transaction.details);
-          break;
-        case "newOwner":
-          this.ledger.cars.find((car) => car.vin === vin).owner = newOwner;
-          break;
-        case "newService":
-          this.ledger.cars.push(transaction.details);
+        default:
           break;
       }
     });
@@ -139,5 +127,70 @@ class Blockchain {
     });
     return { block: correctBlock, transaction: correctTransaction };
   }
+
+  addTransactionToPendingTransactions(transaction) {
+    this.pendingTransactions.push(transaction);
+    return this.getLastBlock()["index"] + 1;
+  }
+
+  getLedger() {
+    return this.ledger;
+  }
+
+  createWallet() {
+    const wallet = new Wallet();
+    this.ledger.wallets.push(wallet);
+    return wallet.address;
+  }
+
+  tokenTransaction(transaction) {
+    const senderWallet = this.ledger.wallets.find(
+      (wallet) => wallet.address === transaction.fromAddress
+    );
+    const recipientWallet = this.ledger.wallets.find(
+      (wallet) => wallet.address === transaction.toAddress
+    );
+
+    if (!this.validateTokenTransaction(transaction)) return;
+
+    // Deduct the amount from the sender's wallet
+    senderWallet.balance -= transaction.amount;
+
+    // Add the amount to the recipient's wallet
+    if (recipientWallet) {
+      recipientWallet.balance += transaction.amount;
+    } else {
+      // If the recipient's wallet doesn't exist, create it
+      const newWallet = new Wallet();
+      newWallet.address = transaction.toAddress;
+      newWallet.balance = transaction.amount;
+      this.ledger.wallets.push(newWallet);
+    }
+  }
+
+  validateTokenTransaction(transaction) {
+    const senderWallet = this.ledger.wallets.find(
+      (wallet) => wallet.address === transaction.fromAddress
+    );
+
+    if (
+      !!recipientWallet ||
+      !senderWallet ||
+      senderWallet.getBalance() < transaction.amount
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  createTokenTransaction(transaction) {
+    if (!this.validateTokenTransaction(transaction)) return;
+    const newTransactionIndex =
+      this.addTransactionToPendingTransactions(transaction);
+
+    return newTransactionIndex;
+  }
 }
+
 module.exports = Blockchain;
