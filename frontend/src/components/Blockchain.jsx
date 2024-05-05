@@ -26,11 +26,10 @@
       blockchainList = blockchain.map((block, i) => {
         return <Block block={block} key={i} index={i} />;
       });
-      console.log("blockchainLIst",blockchainList);
     }
 
     return (
-      <>
+      <div className='overflow-y-scroll  '>
         <h1>Blockchain</h1>
         <ul>{blockchainList}</ul>
         {blockchainList.length === 0 && (
@@ -38,6 +37,6 @@
             <p>No blockchain to display</p>
           </div>
         )}
-      </>
+      </div>
     );
   }

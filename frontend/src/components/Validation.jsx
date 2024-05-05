@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react'
 
 export default function Validation() {
     const [isValid, setIsValid] = useState(null)
+    // const [validating, setValidating] = useState(false)
+
+    // const handleValidation = () => {
+    //     setValidating(true)
+    // try {
+    //   const result = await validateBlockchain();
+
+    // }
 
     useEffect(() => {
         function validateBlockchain() {

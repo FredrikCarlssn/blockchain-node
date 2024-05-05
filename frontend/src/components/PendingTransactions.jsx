@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Transaction from "./Transaction";
-import { getPendingTransactions } from '../services/blockchainAPI.js';
+import { getPendingTransactions, mineBlock } from '../services/blockchainAPI.js';
 
 export default function PendingTransactions() {
     const [pendingTransactions, setPendingTransactions] = useState([]);
@@ -8,34 +8,41 @@ export default function PendingTransactions() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const pendingTransactionsData = await getPendingTransactions();
-          setPendingTransactions(pendingTransactionsData);
+          const data = await getPendingTransactions();
+          setPendingTransactions(data.data);
         } catch (error) {
           console.error('Error fetching pending transactions:', error);
+          setPendingTransactions([]);
         }
       };
 
       fetchData();
     }, []);
-
-    let pendingTransactionsList = ""
-
-    if (pendingTransactions) {
-      pendingTransactionsList = pendingTransactions.map((transaction, i) => {
-        return <Transaction transaction={transaction} key={i} index={i} />;
-      });
+    
+    
+    
+    const mine = () => {
+      mineBlock();
     }
 
+    let pendingTransactionsList = []
+    
+         pendingTransactionsList = pendingTransactions.map((transaction, i) => {
+        return <Transaction transaction={transaction} key={i} index={i} />;
+      });
+
+
     return (
-      <>
-        <h1>pendingTransactions</h1>
+      <div className="border-2 border-red-600">
+        <h1 className="font-bold ">Pending Transactions</h1>
         <ul>{pendingTransactionsList}</ul>
         {pendingTransactionsList.length === 0 && (
           <div>
-            <p>No pendingTransactions to display</p>
+            <p className="italic">No pending Transactions to display</p>
           </div>
         )}
-      </>
+        <button className="bg-gray-800 w-40 h-10 mb-4 mt-4" onClick={mine}>Mine</button>
+      </div>
     );
   }
 

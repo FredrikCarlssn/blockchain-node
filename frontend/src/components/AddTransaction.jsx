@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, setTimeout } from "react";
+import { createTransaction } from "../services/blockchainAPI";
 
-
-
-export default function TransactionForm(props) {
+export default function TransactionForm() {
   const [transactionData, setTransactionData] = useState({
     fromAddress: "",
     toAddress: "",
@@ -26,7 +25,13 @@ export default function TransactionForm(props) {
       transactionData.amount.trim() !== ""
     ) {
       setErrMsg("");
-      await props.createTransaction(JSON.stringify(transactionData));
+      const success = await createTransaction(transactionData);
+      if (!success) {setErrMsg("Transaction not valid")} else {
+        setErrMsg("Transaction sent");
+        setTimeout(() => {
+          setErrMsg("");
+        }, [3000])
+      }
       setTransactionData({
         fromAddress: "",
         toAddress: "",
@@ -39,39 +44,47 @@ export default function TransactionForm(props) {
 
   return (
     <>
-      <h1>Add a New Transaction</h1>
+      <h1 className="font-bold">Add a New Transaction</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="fromAddress">From Address:</label>
+ 
+      <div className="flex justify-center items-center ">
+          <label className="font-bold text-md w-32 mx-4 italic flex justify-end" htmlFor="fromAddress">From Address:</label>
           <input
+          className="w-9/12 h-8 mt-2 placeholder: pl-2"
             type="text"
             id="fromAddress"
+            placeholder="Enter address"
             name="fromAddress"
             value={transactionData.fromAddress}
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="toAddress">To Address:</label>
+        <div className="flex justify-center items-center">
+          <label className="font-bold text-md w-32 mx-4 italic flex justify-end" htmlFor="toAddress">To Address:</label>
           <input
+       className="w-9/12 h-8 mt-2 placeholder: pl-2"
             type="text"
             id="toAddress"
             name="toAddress"
+            placeholder="Enter address"
             value={transactionData.toAddress}
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="amount">Amount:</label>
+        <div className="flex flex-col justify-center items-center">
+          <label className="font-bold text-md italic flex justify-end mt-4 text-xl" htmlFor="amount">Amount</label>
           <input
+      className="w-4/12 h-8 mt-2  placeholder: pl-2"
             type="number"
             id="amount"
             name="amount"
+            placeholder="Enter amount"
             value={transactionData.amount}
             onChange={handleChange}
           />
         </div>
-        <button>Add Transaction</button>
+
+        <button className="mt-6 w-46 h-12">Add Transaction</button>
         {errMsg && <p>{errMsg}</p>}
       </form>
     </>

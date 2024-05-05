@@ -1,21 +1,23 @@
 
-export default function Transaction(props) {
-    if (props.transaction && props.transaction.length > 0) {
-        //const transaction = JSON.parse(transaction);
+export default function Transaction({transaction}) {
+
+  console.log("transaction", transaction
+)
+        
       return (
-        <>
-          <li>
-            <p>
-              <b>Timestamp:</b> <br /> {props.transaction.fromAddress}
+        <div className=" shadow-md rounded border   my-2">
+          <li className="text-white  mb-4">
+            <p className="mb-2">
+            From Address:  {transaction.data.fromAddress}
             </p>
-            <p>
-              <b>Hash:</b> <br /> {props.transaction.toAddress}
+            <p className="mb-2">
+             To Address:{transaction.data.toAddress}
             </p>
-            <p>
-              <b>Data:</b> <br /> {props.transaction.amount}
+            <p className="mp-2">
+             Amount: {transaction.data.amount}
             </p>
           </li>
-        </>
+        </div>
       );
-    }
+    
   }

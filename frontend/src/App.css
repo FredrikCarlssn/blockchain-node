@@ -1,19 +1,20 @@
-#root {
+ #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
-}
+  z-index: 1;
+ } 
 
 
 
-.background {
+ .background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: -10;
   background: url(./assets/bgnode.jpg) no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
@@ -29,7 +30,7 @@
 
 .content-container {
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
   align-items: center;
   height: 60vh;
   border: 1px solid #000;
@@ -39,13 +40,16 @@
   border: 2px solid #c41616;
   width: 50%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.validator {
+/* .validator {
   width: 100%;
   border: 2px solid blue;
   margin-top: 20px;
-}
+} */
 
 .block {
 border: 2px solid #c41616;

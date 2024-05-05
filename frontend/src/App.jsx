@@ -1,37 +1,31 @@
-import './App.css'
-
-import Block from './components/Block'
+import './App.css'    
 import Blockchain from './components/Blockchain'
 import AddTransaction from './components/AddTransaction'
 import Validation from './components/Validation'
 import PendingTransactions from './components/PendingTransactions'
-import FindBlock from './components/FindBlock'
-import MineBlock from './components/MineBlock'
+import BlockById from './components/BlockById'
 
 function App() {
 
   return (
  
       <div className='background'>
-        <h1 className='jersey-25-charted-regular '>Welcome to your only Blockchain validator</h1>
+        <h1 className='jersey-25-charted-regular text-6xl text-white font-bold py-4 px-6 rounded-lg shadow-lg '>Welcome to your only Blockchain validator</h1>
         <div className='content-container'>
           <div className='container'> 
           <Blockchain/>
-          <FindBlock/>
          </div>
-
           <div className=" container"  >
             <AddTransaction />
             <PendingTransactions />
-            <MineBlock/>
           </div>
         </div>
-    
- 
-        <div className='validator' >
-          {/* <Validation /> */}
-          Validation
+        <div className="flex flex-row justify-center items-center">
+        <div className='w-full h-52 '>
+          <BlockById />
         </div>
+        </div>
+        <button className='btn' onClick={() => console.log("klicked the button")}>Validate</button>
       </div>
   )
 }
