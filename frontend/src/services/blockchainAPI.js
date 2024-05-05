@@ -9,9 +9,13 @@ const mineBlock = async (input) => {
 
 const createTransaction = async (input) => {
 	const success = await axios.post(`${BASE_URL}/transaction`, { data: input }).then((res) => {
-		console.log("RES", res);
 		const data = res.data.chain;
-		console.log("DATA FROM CREATE TRANSACTION", data);
+
+		if (res.status == 200) {
+			return true;
+		} else {
+			return false;
+		}
 	});
 	return success;
 };

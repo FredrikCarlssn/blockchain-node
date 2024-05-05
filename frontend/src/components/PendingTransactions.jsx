@@ -2,38 +2,24 @@ import React, { useState, useEffect } from 'react';
 import Transaction from "./Transaction";
 import { getPendingTransactions, mineBlock } from '../services/blockchainAPI.js';
 
-export default function PendingTransactions() {
-    const [pendingTransactions, setPendingTransactions] = useState([]);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const data = await getPendingTransactions();
-          setPendingTransactions(data.data);
-        } catch (error) {
-          console.error('Error fetching pending transactions:', error);
-          setPendingTransactions([]);
-        }
-      };
-
-      fetchData();
-    }, []);
-    
-    
+export default function PendingTransactions(props) {
+   
     
     const mine = () => {
       mineBlock();
+      props.fetchPendingTransactions()
+      props.fetchBlockchain()
     }
 
     let pendingTransactionsList = []
     
-         pendingTransactionsList = pendingTransactions.map((transaction, i) => {
+         pendingTransactionsList = props.pendingTransactions.map((transaction, i) => {
         return <Transaction transaction={transaction} key={i} index={i} />;
       });
 
 
     return (
-      <div className="border-2 border-red-600">
+      <div className="border-2 rounded-2xl border-slate-500 m-2 p-4 overflow-auto">
         <h1 className="font-bold ">Pending Transactions</h1>
         <ul>{pendingTransactionsList}</ul>
         {pendingTransactionsList.length === 0 && (

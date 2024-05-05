@@ -1,7 +1,7 @@
 import { useState, setTimeout } from "react";
 import { createTransaction } from "../services/blockchainAPI";
 
-export default function TransactionForm() {
+export default function TransactionForm(props) {
   const [transactionData, setTransactionData] = useState({
     fromAddress: "",
     toAddress: "",
@@ -28,22 +28,23 @@ export default function TransactionForm() {
       const success = await createTransaction(transactionData);
       if (!success) {setErrMsg("Transaction not valid")} else {
         setErrMsg("Transaction sent");
-        setTimeout(() => {
-          setErrMsg("");
-        }, [3000])
+        // setTimeout(() => {
+        //   setErrMsg("");
+        // }, 3000)
       }
       setTransactionData({
         fromAddress: "",
         toAddress: "",
         amount: "",
       });
+      props.fetchPendingTransactions()
     } else {
       setErrMsg("All fields are required");
     }
   };
 
   return (
-    <>
+    <div className="border-2 rounded-2xl border-slate-500  shadow-2xl p-4 m-3">
       <h1 className="font-bold">Add a New Transaction</h1>
       <form onSubmit={handleSubmit}>
  
@@ -87,6 +88,6 @@ export default function TransactionForm() {
         <button className="mt-6 w-46 h-12">Add Transaction</button>
         {errMsg && <p>{errMsg}</p>}
       </form>
-    </>
+    </div>
   );
 }

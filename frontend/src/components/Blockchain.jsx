@@ -3,33 +3,18 @@
   import { getBlockchain } from '../services/blockchainAPI.js';
 
   export default function Blockchain(props) {
-    const [blockchain, setBlockchain] = useState([]);
 
-    console.log("blockchain", blockchain);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const blockchainData = await getBlockchain();
-          setBlockchain(blockchainData);
-        } catch (error) {
-          console.error('Error fetching blockchain:', error);
-        }
-      };
-
-      fetchData();
-    }, []);
 
     let blockchainList = []
 
-    if (blockchain) {
-      blockchainList = blockchain.map((block, i) => {
+    if (props.blockchain) {
+      blockchainList = props.blockchain.map((block, i) => {
         return <Block block={block} key={i} index={i} />;
       });
     }
 
     return (
-      <div className='overflow-y-scroll  '>
+      <div className='overflow: clip  '>
         <h1>Blockchain</h1>
         <ul>{blockchainList}</ul>
         {blockchainList.length === 0 && (
