@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
+import Block from './components/Block'
+import Blockchain from './components/Blockchain'
+import AddTransaction from './components/AddTransaction'
+import Validation from './components/Validation'
+import PendingTransactions from './components/PendingTransactions'
+import FindBlock from './components/FindBlock'
+import MineBlock from './components/MineBlock'
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+ 
+      <div className='background'>
+        <h1 className='jersey-25-charted-regular '>Welcome to your only Blockchain validator</h1>
+        <div className='content-container'>
+          <div className='container'> 
+          <Blockchain/>
+          <FindBlock/>
+         </div>
+
+          <div className=" container"  >
+            <AddTransaction />
+            <PendingTransactions />
+            <MineBlock/>
+          </div>
+        </div>
+    
+ 
+        <div className='validator' >
+          {/* <Validation /> */}
+          Validation
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
   )
 }
 

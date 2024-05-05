@@ -5,38 +5,54 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url(./assets/bgnode.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.jersey-25-charted-regular {
+  font-family: "Jersey 25 Charted", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  border: 1px solid #000;
 }
 
-.card {
-  padding: 2em;
+.container {
+  border: 2px solid #c41616;
+  width: 50%;
+  height: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+.validator {
+  width: 100%;
+  border: 2px solid blue;
+  margin-top: 20px;
+}
+
+.block {
+border: 2px solid #c41616;
+
+}
+
+.block-list {
+  text-align: start;
+
 }
