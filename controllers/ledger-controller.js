@@ -1,7 +1,7 @@
 const { blockchain } = require("../utilities/config.js");
 const Keys = require("../models/keyGenerator.js");
 
-exports.createAccount = (req, res) => {
+exports.createWallet = (req, res) => {
   let { name, publicKey } = req.body;
   let keys;
   if (!publicKey) {

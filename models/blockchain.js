@@ -43,29 +43,16 @@ class Blockchain {
             this.ledger.cars.push(transaction.details);
           break;
         case "newPerson":
-          // if (name && publicKey)
           this.ledger.owners.push(transaction.details);
           break;
         case "newDealership":
-          // if (name && location && publicKey)
           this.ledger.dealerships.push(transaction.details);
           break;
         case "newOwner":
-          // if (vin && owner) {
-          // const keys = new Keys({ publicKey: owner });
-          // if (vin + owner === keys.decryptWithPublicKey(encryptedTransaction))
           this.ledger.cars.find((car) => car.vin === vin).owner = newOwner;
-          // }
           break;
         case "newService":
-          // if (publicKey && vin && service) {
-          // const keys = new Keys({ publicKey });
-          // if (
-          // vin + service ===
-          // keys.decryptWithPublicKey(encryptedTransaction)
-          // )
           this.ledger.cars.push(transaction.details);
-          // }
           break;
       }
     });
