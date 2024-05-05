@@ -19,6 +19,9 @@ class Blockchain {
     this.ledger = { wallets: [wallet] };
     this.nodeUrl = process.argv[3];
     this.networkNodes = [];
+    console.log(
+      `This m** f** is rich as f**, go steal his money: ${this.ledger.wallets[0].address}`
+    );
   }
 
   createNewBlock(nonce, previousBlockHash, hash) {
@@ -36,7 +39,9 @@ class Blockchain {
 
   emptyPendingTransactions(newBlock) {
     newBlock.transactions.map((transaction) => {
-      this.tokenTransaction(transaction);
+      if (!transaction.fromAddress) {
+        this.createTokenTransaction(transaction);
+      }
     });
     this.pendingTransactions = [];
   }
@@ -47,7 +52,7 @@ class Blockchain {
 
   addTransactionToPendingTransactions(transaction) {
     this.pendingTransactions.push(transaction);
-    return this.getLastBlock()["index"] + 1;
+    return true;
   }
 
   hashBlock(previousBlockHash, currentBlockData, nonce) {
