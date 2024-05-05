@@ -41,9 +41,6 @@ export default function Validation() {
         <button className={`border-${isValid ? 'green' : 'red'}-500 border-2`} onClick={handleValidation} disabled={validating}>
           {validating ? "Validating..." : "Validate Blockchain"}
         </button>
-        {isValid !== null && (
-          <p>{isValid ? "Blockchain is Valid" : "Blockchain is Invalid"}</p>
-        )}
       </div>
     );
 }

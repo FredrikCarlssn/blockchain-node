@@ -1,4 +1,4 @@
-import { useState, setTimeout } from "react";
+import { useState } from "react";
 import { createTransaction } from "../services/blockchainAPI";
 
 export default function TransactionForm(props) {
@@ -28,9 +28,9 @@ export default function TransactionForm(props) {
       const success = await createTransaction(transactionData);
       if (!success) {setErrMsg("Transaction not valid")} else {
         setErrMsg("Transaction sent");
-        // setTimeout(() => {
-        //   setErrMsg("");
-        // }, 3000)
+        setTimeout(() => {
+          setErrMsg("");
+        }, 3000)
       }
       setTransactionData({
         fromAddress: "",
@@ -45,7 +45,7 @@ export default function TransactionForm(props) {
 
   return (
     <div className="border-2 rounded-2xl border-slate-500  shadow-2xl p-4 m-3">
-      <h1 className="font-bold">Add a New Transaction</h1>
+      <h1 className="font-bold text-4xl">New Transaction</h1>
       <form onSubmit={handleSubmit}>
  
       <div className="flex justify-center items-center ">

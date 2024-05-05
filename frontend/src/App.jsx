@@ -38,9 +38,17 @@ function App() {
 
   return (
       <div className='background'>
-        <h1 className='jersey-25-charted-regular text-6xl text-white font-bold py-4 px-6 rounded-lg shadow-lg '>Welcome to your only Blockchain validator</h1>
+        <h1 className='jersey-25-charted-regular text-7xl text-white font-bold py-4 px-6 rounded-lg shadow-lg '>Welcome to the Blockchain Validator</h1>
+        <div className='flex flex-row justify-around p-5'>
+        <BlockById />
+        <Validation />
+          </div>
         <div className='content-container'>
-          <div className='container'> 
+        <div className="flex flex-row justify-center items-center">
+        <div className='w-full h-52 '>
+        </div>
+        </div>
+          <div className='container-1 container'> 
           <Blockchain blockchain={blockchain}/>
          </div>
           <div className=" container"  >
@@ -48,12 +56,6 @@ function App() {
             <PendingTransactions pendingTransactions={pendingTransactions} fetchPendingTransactions={fetchPendingTransactions} fetchBlockchain={fetchBlockchain}/>
           </div>
         </div>
-        <div className="flex flex-row justify-center items-center">
-        <div className='w-full h-52 '>
-          <BlockById />
-        </div>
-        </div>
-        <Validation />
       </div>
   )
 }

@@ -12,20 +12,20 @@ if (props.block.transactions) {
 }
 
     return (
-      <div className="block p-4">
-        <h2 className="">Block {props.block.index} </h2>
-        <li className="block-list list-none ">
+      <div className=" p-4  rounded-3xl  border-slate-500 mb-5  bg-white bg-opacity-25 ">
+        <h2 className=" text-1xl font-bold">Block {props.block.index} </h2>
+        <li className="block-list">
           <p>
-            <b>Timestamp:</b>  {props.block.timestamp}
+            <b className="font-bold">Timestamp:</b>  {props.block.timestamp}
           </p>
           <p>
-            <b>Hash:</b>  {props.block.hash}
+            <b className="font-bold">Hash:</b>  {props.block.hash}
           </p>
           <p>
-             <b>Transactions:</b>  {transactionList} 
+            <b className="font-bold">Last hash:</b>  {props.block.previousBlockHash}
           </p>
           <p>
-            <b>Last hash:</b>  {props.block.previousBlockHash}
+             <b className="font-bold items-center">Transactions:</b>  {transactionList} 
           </p>
         </li>
       </div>

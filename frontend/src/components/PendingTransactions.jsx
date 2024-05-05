@@ -19,15 +19,15 @@ export default function PendingTransactions(props) {
 
 
     return (
-      <div className="border-2 rounded-2xl border-slate-500 m-2 p-4 overflow-auto">
-        <h1 className="font-bold ">Pending Transactions</h1>
+      <div className="border-2 rounded-2xl border-slate-500 m-2 p-4 overflow-auto h-[50%] ">
+        <h1 className="font-bold text-4xl">Pending Transactions</h1>
         <ul>{pendingTransactionsList}</ul>
         {pendingTransactionsList.length === 0 && (
           <div>
             <p className="italic">No pending Transactions to display</p>
           </div>
         )}
-        <button className="bg-gray-800 w-40 h-10 mb-4 mt-4" onClick={mine}>Mine</button>
+        <button className=" w-40 h-10 mb-4 mt-4" onClick={mine}>Mine</button>
       </div>
     );
   }

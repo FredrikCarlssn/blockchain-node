@@ -14,8 +14,8 @@
     }
 
     return (
-      <div className='overflow: clip  '>
-        <h1>Blockchain</h1>
+      <div className=' border-2 rounded-2xl border-slate-500  p-4 m-3 overflow-auto h-[100vh] '>
+        <h1 className=' font-bold text-4xl mb-3'>Blockchain</h1>
         <ul>{blockchainList}</ul>
         {blockchainList.length === 0 && (
           <div>
