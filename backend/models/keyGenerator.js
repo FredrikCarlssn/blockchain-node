@@ -11,7 +11,6 @@ class Keys {
       const { privateKey, publicKey } = this.generateKeys("test");
       this.privateKey = privateKey;
       this.publicKey = publicKey;
-      console.log(this.publicKey.toString());
     }
   }
 

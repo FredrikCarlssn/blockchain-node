@@ -36,13 +36,7 @@ class Blockchain {
 
   emptyPendingTransactions(newBlock) {
     newBlock.transactions.map((transaction) => {
-      switch (transaction.transactionType) {
-        case "token":
-          this.tokenTransaction(transaction);
-          break;
-        default:
-          break;
-      }
+      this.tokenTransaction(transaction);
     });
     this.pendingTransactions = [];
   }
@@ -128,11 +122,6 @@ class Blockchain {
     return { block: correctBlock, transaction: correctTransaction };
   }
 
-  addTransactionToPendingTransactions(transaction) {
-    this.pendingTransactions.push(transaction);
-    return this.getLastBlock()["index"] + 1;
-  }
-
   getLedger() {
     return this.ledger;
   }
@@ -173,10 +162,12 @@ class Blockchain {
       (wallet) => wallet.address === transaction.fromAddress
     );
 
+    console.log(transaction);
+
     if (
-      !!recipientWallet ||
+      !transaction.toAddress ||
       !senderWallet ||
-      senderWallet.getBalance() < transaction.amount
+      senderWallet.balance < transaction.amount
     ) {
       return false;
     }
@@ -185,11 +176,11 @@ class Blockchain {
   }
 
   createTokenTransaction(transaction) {
-    if (!this.validateTokenTransaction(transaction)) return;
-    const newTransactionIndex =
+    const success = this.validateTokenTransaction(transaction);
+    if (success) {
       this.addTransactionToPendingTransactions(transaction);
-
-    return newTransactionIndex;
+    }
+    return success;
   }
 }
 

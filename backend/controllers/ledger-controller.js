@@ -7,11 +7,13 @@ exports.createWallet = (req, res) => {
 };
 
 exports.createTokenTransaction = (req, res) => {
-  const { ammount, fromAddress, toAddress } = req.body;
+  const { amount, fromAddress, toAddress } = req.body;
   const transaction = {
-    transactionType: "newTokenTransaction",
-    details: { ammount, fromAddress, toAddress },
+    amount,
+    fromAddress,
+    toAddress,
   };
-  blockchain.addTransactionToPendingTransactions(transaction);
-  res.status(201).json({ success: true, data: { ammount, toAddress } });
+  const validationSuccess = blockchain.createTokenTransaction(transaction);
+  if (!validationSuccess) return res.status(400).json({ success: false });
+  return res.status(201).json({ success: true });
 };
