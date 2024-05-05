@@ -26,18 +26,20 @@ export default function TransactionForm(props) {
     ) {
       setErrMsg("");
       const success = await createTransaction(transactionData);
-      if (!success) {setErrMsg("Transaction not valid")} else {
+      if (!success) {
+        setErrMsg("Transaction not valid");
+      } else {
         setErrMsg("Transaction sent");
         setTimeout(() => {
           setErrMsg("");
-        }, 3000)
+        }, 3000);
       }
       setTransactionData({
         fromAddress: "",
         toAddress: "",
         amount: "",
       });
-      props.fetchPendingTransactions()
+      props.fetchPendingTransactions();
     } else {
       setErrMsg("All fields are required");
     }
@@ -45,13 +47,17 @@ export default function TransactionForm(props) {
 
   return (
     <div className="border-2 rounded-2xl border-slate-500  shadow-2xl p-4 m-3">
-      <h1 className="font-bold text-4xl">New Transaction</h1>
+      <h1 className="font-bold font-bold text-4xl">Add a New Transaction</h1>
       <form onSubmit={handleSubmit}>
- 
-      <div className="flex justify-center items-center ">
-          <label className="font-bold text-md w-32 mx-4 italic flex justify-end" htmlFor="fromAddress">From Address:</label>
+        <div className="flex justify-center items-center ">
+          <label
+            className="font-bold text-md w-32 mx-4 italic flex justify-end"
+            htmlFor="fromAddress"
+          >
+            From Address:
+          </label>
           <input
-          className="w-9/12 h-8 mt-2 placeholder: pl-2"
+            className="w-9/12 h-8 mt-2 placeholder: pl-2"
             type="text"
             id="fromAddress"
             placeholder="Enter address"
@@ -61,9 +67,14 @@ export default function TransactionForm(props) {
           />
         </div>
         <div className="flex justify-center items-center">
-          <label className="font-bold text-md w-32 mx-4 italic flex justify-end" htmlFor="toAddress">To Address:</label>
+          <label
+            className="font-bold text-md w-32 mx-4 italic flex justify-end"
+            htmlFor="toAddress"
+          >
+            To Address:
+          </label>
           <input
-       className="w-9/12 h-8 mt-2 placeholder: pl-2"
+            className="w-9/12 h-8 mt-2 placeholder: pl-2"
             type="text"
             id="toAddress"
             name="toAddress"
@@ -73,9 +84,14 @@ export default function TransactionForm(props) {
           />
         </div>
         <div className="flex flex-col justify-center items-center">
-          <label className="font-bold text-md italic flex justify-end mt-4 text-xl" htmlFor="amount">Amount</label>
+          <label
+            className="font-bold text-md italic flex justify-end mt-4 text-xl"
+            htmlFor="amount"
+          >
+            Amount
+          </label>
           <input
-      className="w-4/12 h-8 mt-2  placeholder: pl-2"
+            className="w-4/12 h-8 mt-2  placeholder: pl-2"
             type="number"
             id="amount"
             name="amount"

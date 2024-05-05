@@ -24,5 +24,5 @@ app.use("/api/v1/consensus", consensus);
 app.use("/api/v1/ledger", ledger);
 
 app.listen(process.argv[2], () => {
-	console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
