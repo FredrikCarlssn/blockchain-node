@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { validateBlockchain } from "../services/blockchainAPI.js";
 
@@ -11,37 +11,32 @@ export default function Validation() {
     try {
       const result = await validateBlockchain();
       setIsValid(result.success);
-      setValidating(false);
     } catch (error) {
       console.error("Error validating blockchain:", error);
-      setValidating(false);
       setIsValid(false);
+    } finally {
+      setValidating(false);
     }
   };
 
-  // useEffect(() => {
-  //     function validateBlockchain() {
-  //         for (let i = 0; i < props.blockchain.length; i++) {
-
-  //           if(props.blockchain[i].hash !== props.blockchain[i].calculateHash()) {
-  //             setIsValid(false)
-  //             return;
-  //           }
-  //         }
-  //         setIsValid(true)
-  //     }
-  //     validateBlockchain()
-  // }, [props.blockchain]);
+  let buttonText = "Validate Blockchain";
+  if (validating) {
+    buttonText = "Validating...";
+  } else if (isValid === true) {
+    buttonText = "Blockchain Valid";
+  } else if (isValid === false) {
+    buttonText = "Blockchain Invalid";
+  }
 
   return (
-    <div>
-      <button
-        className={`border-${isValid ? "green" : "red"}-500 border-2`}
-        onClick={handleValidation}
-        disabled={validating}
-      >
-        {validating ? "Validating..." : "Validate Blockchain"}
-      </button>
-    </div>
+    <button
+      className={`${
+        isValid === null ? "validationDefault" : isValid ? "valid" : "notValid"
+      } border-4 validationButton`}
+      onClick={handleValidation}
+      disabled={validating}
+    >
+      {buttonText}
+    </button>
   );
 }
